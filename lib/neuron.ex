@@ -86,7 +86,8 @@ defmodule Neuron do
       |> Enum.zip(last_inputs)
       |> Enum.map(fn {weight, input} -> weight + learning_rate * delta * input end)
 
-    {:reply, delta, %{state | input_weights: new_weights, bias_weight: new_bias_weight}}
+    {:reply, {delta, new_weights},
+     %{state | input_weights: new_weights, bias_weight: new_bias_weight}}
   end
 
   defp initialize_weights(number_of_inputs) do
